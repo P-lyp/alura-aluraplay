@@ -11,8 +11,9 @@ async function listaVideos() {
 
     // em cada objeto da lista, ele será passado como parâmetro na arrow function
     listaApi.forEach((element) =>
-        // as chaves de cada objeto é passado como parâmetro para a função que exibe os elementos no html, em seguida o resultado dessa função com o componente html, será atribuido através do appendChild no elemento da lista
+        // através do .appendChild() será atribuído a lista o constroiCard
         lista.appendChild(
+            // passa para o constroiCard o titulo, descricao, url e imagem dos elementos
             constroiCard(
                 element.titulo,
                 element.descricao,
@@ -26,7 +27,7 @@ async function listaVideos() {
 listaVideos();
 
 //função que recebe as chaves dos objetos como paramêtro e cria dinamicamente o componente html dos vídeos
-function constroiCard(titulo, descricao, url, imagem) {
+export default function constroiCard(titulo, descricao, url, imagem) {
     // é criado o elemento li já que depois será colocado em uma ul
     const video = document.createElement("li");
 

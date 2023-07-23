@@ -1,5 +1,6 @@
 //importa o arquivo conectaAPI
 import { conectaApi } from "./conectaApi.js";
+import constroiCard from "./mostrarVideos.js";
 
 // seleciona o elemento botão do campo de pesquisa
 const botaoDePesquisa = document.querySelector("[data-botao-pesquisa]");
@@ -20,5 +21,20 @@ async function buscarVideo(evento) {
     // const busca recebe -> dadosDePesquisa(conteudo digitado no campo de pesquisa) é enviado para função buscaVideo que pega esse valor e faz a busca
     const busca = await conectaApi.buscaVideo(dadosDePesquisa);
 
-    console.log(busca);
+    const lista = document.querySelector("[data-lista]");
+
+    while (lista.firstChild) {
+        lista.removeChild(lista.firstChild);
+    }
+
+    busca.forEach((element) =>
+        lista.appendChild(
+            constroiCard(
+                element.titulo,
+                element.descricao,
+                element.url,
+                element.imagem
+            )
+        )
+    );
 }
