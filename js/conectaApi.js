@@ -24,6 +24,11 @@ async function criaVideo(titulo, descricao, url, imagem) {
             imagem: imagem,
         }),
     });
+
+    if (!conexao.ok) {
+        throw new Error("Não foi possível enviar o vídeo!");
+    }
+
     //procedimento padrao de uma chamada de api
     const conexaoConvertida = await conexao.json();
     return conexaoConvertida;

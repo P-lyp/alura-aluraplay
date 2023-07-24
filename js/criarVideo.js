@@ -16,9 +16,12 @@ async function criarVideo(evento) {
     const descricao = Math.floor(Math.random() * 10).toString();
     const url = document.querySelector("[data-url]").value;
     const imagem = document.querySelector("[data-imagem]").value;
-
-    //essas constantes são passadas para a função criaVideo onde usará metodo POST da api
-    await conectaApi.criaVideo(titulo, descricao, url, imagem);
+    try {
+        //essas constantes são passadas para a função criaVideo onde usará metodo POST da api
+        await conectaApi.criaVideo(titulo, descricao, url, imagem);
+    } catch (e) {
+        alert(e);
+    }
 
     //no final, encaminha para uma outra página para mostrar ao usuário que foi concluído
     window.location.href = "../pages/envio-concluido.html";

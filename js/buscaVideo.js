@@ -37,4 +37,8 @@ async function buscarVideo(evento) {
             )
         )
     );
+
+    if (busca.length == 0) {
+        lista.innerHTML = `<h2 class="mensagem__titulo">Não foi possível encontrar vídeos com esse termo!</h2>`;
+    }
 }

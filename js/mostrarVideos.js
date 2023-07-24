@@ -6,22 +6,26 @@ const lista = document.querySelector("[data-lista]");
 
 // função que pega os objetos da api e em seguida é passada para função de criar os elementos do video com os parâmetros de cada chave dentro dos objetos
 async function listaVideos() {
-    // armazena os dados pegos na conexão com a Api na const listaApi
-    const listaApi = await conectaApi.listaVideos();
+    try {
+        // armazena os dados pegos na conexão com a Api na const listaApi
+        const listaApi = await conectaApi.listaVideos();
 
-    // em cada objeto da lista, ele será passado como parâmetro na arrow function
-    listaApi.forEach((element) =>
-        // através do .appendChild() será atribuído a lista o constroiCard
-        lista.appendChild(
-            // passa para o constroiCard o titulo, descricao, url e imagem dos elementos
-            constroiCard(
-                element.titulo,
-                element.descricao,
-                element.url,
-                element.imagem
+        // em cada objeto da lista, ele será passado como parâmetro na arrow function
+        listaApi.forEach((element) =>
+            // através do .appendChild() será atribuído a lista o constroiCard
+            lista.appendChild(
+                // passa para o constroiCard o titulo, descricao, url e imagem dos elementos
+                constroiCard(
+                    element.titulo,
+                    element.descricao,
+                    element.url,
+                    element.imagem
+                )
             )
-        )
-    );
+        );
+    } catch {
+        lista.innerHTML = `<h2 class="mensagem__titulo">Não foi possível carregar a lista de vídeos!</h2>`;
+    }
 }
 
 listaVideos();
